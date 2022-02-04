@@ -1,0 +1,26 @@
+---
+- name: deploy httpd server
+  hosts: 10.0.0.72,10.0.0.73
+  become: true
+  tasks:
+
+    - name: httpd installed
+      ansible.builtin.yum:
+        name: httpd
+        state: present
+
+    - name: firewalld rules
+      firewalld:
+        service: "{{ item }}"
+        state: enabled
+        permanent: true
+        immediate: true
+      with_items:
+        - http
+        - https
+
+    - name: enable and start service
+      ansible.builtin.service:
+        name: httpd
+        state: started
+        enabled: true      
