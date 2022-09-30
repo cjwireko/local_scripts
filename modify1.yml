@@ -1,0 +1,19 @@
+---
+- name: To Copy Contents
+  hosts: all
+  tasks:
+    - name:
+      copy:
+        content: 'Development'
+        dest: /etc/issue
+      when: "'ubuntu' in group_names"
+    - name:
+      copy:
+        content: 'Test'
+        dest: /etc/issue
+      when: "'ubuntu' in group_names"
+    - name:
+      copy:
+        content: 'production'
+        dest: /etc/issue
+      when: "'rhel8' in group_names"

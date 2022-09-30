@@ -1,0 +1,24 @@
+---
+- name: To install php and mariadb package 
+  hosts: rhel8
+  become: true
+  tasks:
+    - yum: 
+        name: 
+          - php
+          - mariadb
+        state: absent
+- name: TO install development tool
+  hosts: rhel8
+  become: true
+  tasks:
+    - yum: 
+        name: "@Development Tools"
+        state: absent 
+- name: Updates all packages to the latest version 
+  hosts: rhel8
+  become: true
+  tasks:
+    - yum:
+        name: '*'
+        state: latest
