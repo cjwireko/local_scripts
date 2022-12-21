@@ -1,0 +1,19 @@
+---
+- name: update and reboot
+  hosts: all
+  become: true
+  gather_facts: no
+  tasks:
+    - name: update all packages
+      yum:
+        name: '*'
+        state: latest
+        security: yes
+      tags: updates
+
+    - name: reboot servers
+      reboot:
+        pre_reboot_delay: 90
+        msg: "!!!Atention, server will be rebooted in 90 seconds!!!"
+      tags: reboot  
+       
