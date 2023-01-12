@@ -1,0 +1,12 @@
+---
+- name: lvm partition demo
+  hosts: all
+  become: true
+  tasks:
+    - name: create lvm partition
+      community.general.parted:
+        device: /dev/sdb
+        number: 1
+        flags: [ lvm ] 
+        state: present
+
